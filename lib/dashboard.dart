@@ -1,8 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+Map<String, dynamic> uData = {'uid': '123456','uname': 'MCruz'};
+Map<String, Map<String, Object>> pointsData = {'PizzaHut': {'points': '750',
+                                'logoURL': 'https://www.admin.paseovinacentro.cl/assets/uploads/tienda/logo2/ba739-logo-pizza-hut.png',
+                                'lastCode':'SuperHutCode',
+                                'nameBussiness':'Pizza Hut'},
+
+                    'ClaroESA': {'points': '800',
+                                'logoURL': 'https://lh3.googleusercontent.com/proxy/fDTa1ZVfmmEdnhFX1sybswWEqDgwCUc2BzkjYaeD0CKPZ2lCIYdwCsNRyaSrwZMkjJCq4FtB97UwOp1urJbJmgSbjkCaJKT_ODkJI9_tASEXkjxQ4WeRlLI78q79qqpWKsqhmU1GAA',
+                                'lastCode':'CodClaroSV',
+                                'nameBussiness':'Claro El Salavador'},
+
+                    'SuperSelectos': {'points': '300',
+                                'logoURL': 'https://www.baccredomatic.com/sites/default/files/sv_logoselectos.jpg',
+                                'lastCode':'SelectoSV',
+                                'nameBussiness':'Super Selectos'}};
+  
+//var pointsData = pointsDataMAP.values.toList();
+
 class Dashboard extends StatelessWidget {
- @override
+
  Widget build(BuildContext context) {
  return MaterialApp(
    title: 'InnovAnuncios',
@@ -10,145 +28,142 @@ class Dashboard extends StatelessWidget {
       appBar: AppBar(
         title: Text('InnovAnuncios')
       ),
-    body: Container(
-   padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
-   height: 220,
-   width: double.maxFinite,
-   child: Card(
-     elevation: 5,
-     child: Padding(
-       padding: EdgeInsets.all(7),
-       child: Stack(children: <Widget>[
-         Align(
-           alignment: Alignment.centerRight,
-           child: Stack(
-             children: <Widget>[
-               Padding(
-                   padding: const EdgeInsets.only(left: 10, top: 5),
-                   child: Column(
-                     children: <Widget>[
-                       Row(
-                         children: <Widget>[
-                           cryptoIcon(),
-                           SizedBox(
-                             height: 10,
-                           ),
-                           cryptoNameSymbol(),
-                           Spacer(),
-                           cryptoChange(),
-                           SizedBox(
-                             width: 10,
-                           ),
-                           changeIcon(),
-                           SizedBox(
-                             width: 20,
-                           )
-                         ],
-                       ),
-                       Row(
-                         children: <Widget>[cryptoAmount()],
-                       )
-                     ],
-                   ))
-             ],
-           ),
-         )
-       ]),
-     ),
-   ),
- )));
+    body:  Container(
+   child:  ListView(
+     //children: //generateCards(),
+      children: <Widget>[
+        initialView(),
+        card('PizzaHut'),
+        card('ClaroESA'),
+        card('SuperSelectos')
+      ],
+   )
+   )
+ )
+ );
  }
- Widget cryptoIcon() {
-   return Padding(
-     padding: const EdgeInsets.only(left: 15.0),
-     child: Align(
-         alignment: Alignment.centerLeft,
-         child: Icon(
-           Icons.https,
-           color: Colors.amber,
-           size: 40,
-         )),
-   );
+
+ List<Widget> generateCards(){
+   List<Widget> cardList = new List<Widget>();
+    //print(pointsData);
+    // For o ForEach o ForIn para recorrer la matriz y generarlos de manera dinamica,... 
+    /*for (int i=0; i < 2; i++){
+      final cardWidget = card(1);
+      cardList.add(cardWidget);
+    }*/
+
+    //de momento recorriendo el array de forma manual
+    cardList.add(card('PizzaHut'));
+    cardList.add(card('ClaroESA'));
+    cardList.add(card('SuperSelectos'));
+    return cardList;
  }
- Widget cryptoNameSymbol() {
-   return Align(
-     alignment: Alignment.centerLeft,
-     child: RichText(
-       text: TextSpan(
-         text: 'Bitcoin',
-         style: TextStyle(
-             fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20),
-         children: <TextSpan>[
-           TextSpan(
-               text: '\nBTC',
-               style: TextStyle(
-                   color: Colors.grey,
-                   fontSize: 15,
-                   fontWeight: FontWeight.bold)),
-         ],
-       ),
-     ),
+
+  Widget initialView(){
+    return Column( 
+        children: <Widget>[
+       uNameShow(),
+       new RaisedButton(
+                    onPressed: goToCodeExchange,
+                    textColor: Colors.white,
+                    color: Colors.blue,
+                    padding: const EdgeInsets.all(8.0),
+                    child: new Text(
+                      "Canjear un Código",
+                    ),
+                  ),
+       Text('Mis InnovaPuntos: \n', 
+        style: TextStyle(
+          fontWeight: FontWeight.bold, color: Colors.black, fontSize: 18
+        )),
+     ]
    );
   }
-Widget cryptoChange() {
-  return Align(
-    alignment: Alignment.topRight,
-    child: RichText(
-      text: TextSpan(
-        text: '+3.67%',
-        style: TextStyle(
-            fontWeight: FontWeight.bold, color: Colors.green, fontSize: 20),
-        children: <TextSpan>[
-        TextSpan(
-            text: '\n+202.835',
-            style: TextStyle(
-                color: Colors.green,
-                fontSize: 15,
-                fontWeight: FontWeight.bold)),
-      ],
-    ),
-  ),
-);
-}
-Widget changeIcon() {
-  return Align(
-      alignment: Alignment.topRight,
-      child: Icon(
-        Icons.arrow_upward,
-        //Typicons.arrow_sorted_up,
-        color: Colors.green,
-        size: 30,
-      ));
-}
-Widget cryptoAmount() {
-  return Align(
-    alignment: Alignment.centerLeft,
-    child: Padding(
-      padding: const EdgeInsets.only(left: 20.0),
-      child: Row(
-        children: <Widget>[
-          RichText(
-            textAlign: TextAlign.left,
-            text: TextSpan(
-              text: '\n\$12.279',
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 35,
+
+  Widget uNameShow() {
+   return Align(
+     alignment: Alignment.center,
+     child: RichText(
+       text: TextSpan(
+         text: '\n' + uData['uname'] + '\n',
+         style: TextStyle(
+             fontWeight: FontWeight.bold, color: Colors.green, fontSize: 20)
+       ), //TextSpan
+     ),// RichText
+   ); // Align
+  }
+
+  void goToCodeExchange(){
+
+  }
+
+Widget card(String objectIndex){
+
+  return Card(
+              elevation: 5,
+              child: Container(
+              height: 100.0,
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    height: 70.0,
+                    width: 70.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(5),
+                        topLeft: Radius.circular(5)
+                      ),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(pointsData[objectIndex]['logoURL'])
+                      )
+                    ),
+                  ),
+                  Container(
+                    height: 100,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(10, 2, 0, 0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(pointsData[objectIndex]['nameBussiness'],style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 48, 48, 54)
+                              )
+                            ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 5, 0, 2),
+                              child: Container(
+                              width: 260,
+                              child: Text('Último Canjeado: '+ pointsData[objectIndex]['lastCode'])
+                            )
+                          ),//Nombre de empresa
+                          Padding(
+                              padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                               child: Container(
+                              //width: 30,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.teal),
+                                borderRadius: BorderRadius.all(Radius.circular(10))
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(3),
+                                child: Text(''+pointsData[objectIndex]['points'] +' Puntos',textAlign: TextAlign.center,)
+                              ),
+                            ),
+                          ), // Fin paddgin de puntos
+                        ],
+                      ),
+                    ),
+                  )
+                ],
               ),
-              children: <TextSpan>[
-                TextSpan(
-                    text: '\n0.1349',
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontStyle: FontStyle.italic,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-              ],
             ),
-          ),
-        ],
-      ),
-    ),
-  );
- }
+          );
+
 }
+
+
+
+}// Fin de la clase Dashboard
+
