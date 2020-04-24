@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:innovanuncios_app/src/views/CodeExchange.dart';
 
-Map<String, dynamic> uData = {'uid': '123456','uname': 'MCruz'};
+Map<String, dynamic> uData = {'uid': '123456','uname': 'usuario_de_InnovAnuncios'};
 Map<String, Map<String, Object>> pointsData = {'PizzaHut': {'points': '750',
                                 'logoURL': 'https://www.admin.paseovinacentro.cl/assets/uploads/tienda/logo2/ba739-logo-pizza-hut.png',
                                 'lastCode':'SuperHutCode',
                                 'nameBussiness':'Pizza Hut'},
 
                     'ClaroESA': {'points': '800',
-                                'logoURL': 'https://lh3.googleusercontent.com/proxy/fDTa1ZVfmmEdnhFX1sybswWEqDgwCUc2BzkjYaeD0CKPZ2lCIYdwCsNRyaSrwZMkjJCq4FtB97UwOp1urJbJmgSbjkCaJKT_ODkJI9_tASEXkjxQ4WeRlLI78q79qqpWKsqhmU1GAA',
+                                'logoURL': 'https://spiquers.com/wp-content/uploads/2014/10/Logo-Claro.png',
                                 'lastCode':'CodClaroSV',
                                 'nameBussiness':'Claro El Salavador'},
 
@@ -32,7 +33,7 @@ class Dashboard extends StatelessWidget {
    child:  ListView(
      //children: //generateCards(),
       children: <Widget>[
-        initialView(),
+        initialView(context),
         card('PizzaHut'),
         card('ClaroESA'),
         card('SuperSelectos')
@@ -59,24 +60,31 @@ class Dashboard extends StatelessWidget {
     return cardList;
  }
 
-  Widget initialView(){
+  Widget initialView(BuildContext context){
     return Column( 
         children: <Widget>[
        uNameShow(),
-       new RaisedButton(
-                    onPressed: goToCodeExchange,
+       new Builder(builder: (context) =>( RaisedButton(
+                    onPressed: (){
+                      Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => CodeExchange()),
+                      );
+                    },
                     textColor: Colors.white,
                     color: Colors.blue,
                     padding: const EdgeInsets.all(8.0),
                     child: new Text(
-                      "Canjear un Código",
-                    ),
-                  ),
+                      "Canjear Código",
+                    )
+                  
+                  ))),
        Text('Mis InnovaPuntos: \n', 
         style: TextStyle(
           fontWeight: FontWeight.bold, color: Colors.black, fontSize: 18
-        )),
+        )
+       ),
      ]
+       
    );
   }
 
@@ -94,7 +102,7 @@ class Dashboard extends StatelessWidget {
   }
 
   void goToCodeExchange(){
-
+    
   }
 
 Widget card(String objectIndex){
