@@ -20,7 +20,10 @@ Map<String, Map<String, Object>> pointsData = {'PizzaHut': {'points': '750',
   
 //var pointsData = pointsDataMAP.values.toList();
 
+
 class Dashboard extends StatelessWidget {
+ 
+
 
  Widget build(BuildContext context) {
  return MaterialApp(
@@ -149,7 +152,6 @@ Widget card(String objectIndex){
                           Padding(
                               padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
                                child: Container(
-                              //width: 30,
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.teal),
                                 borderRadius: BorderRadius.all(Radius.circular(10))
