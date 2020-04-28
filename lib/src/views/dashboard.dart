@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:innovanuncios_app/src/views/CodeExchange.dart';
 
-Map<String, dynamic> uData = {'uid': '123456','uname': 'usuario_de_InnovAnuncios'};
+Map<String, dynamic> uData = {'uid': '123456','uname': 'innovauser'};
 Map<String, Map<String, Object>> pointsData = {'PizzaHut': {'points': '750',
                                 'logoURL': 'https://www.admin.paseovinacentro.cl/assets/uploads/tienda/logo2/ba739-logo-pizza-hut.png',
                                 'lastCode':'SuperHutCode',
@@ -26,9 +26,7 @@ class Dashboard extends StatelessWidget {
 
 
  Widget build(BuildContext context) {
- return MaterialApp(
-   title: 'InnovAnuncios',
-    home: Scaffold(
+  return Scaffold(
       appBar: AppBar(
         title: Text('InnovAnuncios')
       ),
@@ -43,7 +41,6 @@ class Dashboard extends StatelessWidget {
       ],
    )
    )
- )
  );
  }
 
@@ -69,9 +66,8 @@ class Dashboard extends StatelessWidget {
        uNameShow(),
        new Builder(builder: (context) =>( RaisedButton(
                     onPressed: (){
-                      Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => CodeExchange()),
-                      );
+                      //Navigator.of(context).pushNamed('/codeExchange');
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => CodeExchange()));
                     },
                     textColor: Colors.white,
                     color: Colors.blue,

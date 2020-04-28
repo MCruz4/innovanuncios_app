@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:innovanuncios_app/behaviors/hiddenScrollBeHavior.dart';
+import 'package:innovanuncios_app/src/views/login.dart';
 
 class Signup extends StatefulWidget{
   @override
@@ -78,7 +79,8 @@ class _SignUpState extends State<Signup>{
       persistentFooterButtons: <Widget>[
         FlatButton(
           onPressed: (){
-            Navigator.of(context).pushNamed('/signin');
+            //Navigator.of(context).pushNamed('/signin');
+            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => LoginPage()));
           }, 
           child: Text('Ya tengo un cuenta'),)
       ],

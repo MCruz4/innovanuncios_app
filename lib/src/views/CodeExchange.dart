@@ -60,10 +60,8 @@ class CodeExchange extends StatelessWidget{
 
   final inputCodeCtrl = TextEditingController();
   Widget build(BuildContext context) {
-    print(MaterialLocalizations.of(context));
-    return MaterialApp(
-          title: 'InnovAnuncios',
-            home: Scaffold(
+    
+     return Scaffold(
               appBar: AppBar(
                 title: Text('InnovAnuncios')
               ),
@@ -141,7 +139,6 @@ class CodeExchange extends StatelessWidget{
               ]
             )
           )
-        )
         );
   } // Fin clase CodeExchange
   
