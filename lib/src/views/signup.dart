@@ -12,6 +12,9 @@ class Signup extends StatefulWidget{
 class _SignUpState extends State<Signup>{
   String _email;
   String _password;
+  String _nombre;
+  String _apellidos;
+  double borderRadius = 10.00;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,15 +28,20 @@ class _SignUpState extends State<Signup>{
           child: Form(
             child: ListView(
               children: <Widget>[
-                FlutterLogo(
-                  style: FlutterLogoStyle.markOnly,
-                  size: 200.0,  
-                ),
+                Image.asset('assets/imagen/logo.png', 
+        width: 250, height: 250,),
                 SizedBox(height: 30,),
                 TextFormField(
                   autocorrect: false,
                   keyboardType: TextInputType.text,
-                  decoration: InputDecoration(labelText: 'Nombre'),
+                  decoration: new InputDecoration(
+                    labelText: 'Nombre',
+                    border: new OutlineInputBorder(
+                      borderRadius: const BorderRadius.all(
+                        const Radius.circular(10.0),
+                      ),
+                    ), 
+                  ),
                 ),
                 SizedBox(height: 20,),
                 TextFormField(
@@ -61,7 +69,7 @@ class _SignUpState extends State<Signup>{
                   ),
                 ),
                 SizedBox(height: 20,),
-                FlatButton(
+                RaisedButton(
                   onPressed: (){},
                   child: Text('Registrarme'),
                 ),
